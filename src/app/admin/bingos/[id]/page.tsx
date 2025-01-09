@@ -13,10 +13,6 @@ export default async function Page({
   const bingo = response.error ? null : response.result;
 
   const items = await getBingoItems(id);
-
-  console.log(response);
-  console.log(items);
-
   return (
     <div className="min-h-full">
       <AdminHeader />

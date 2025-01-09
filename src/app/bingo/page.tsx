@@ -3,12 +3,9 @@ import React, { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 function Page() {
-  const [value, setValue] = useState("");
-  const router = useRouter();
 
   const handleForm = async (event: FormEvent) => {
     event.preventDefault();
-    console.log(value);
   };
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
