@@ -1,28 +1,9 @@
 "use client";
-import React, { FormEvent } from "react";
-import { useAuthContext } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
+import React from "react";
 import signout from "@/firebase/auth/signout";
-import { createNewBingo } from "@/firebase/bingo/create";
-function Page() {
-  const { user } = useAuthContext();
-  const router = useRouter();
-  const [value, setValue] = React.useState("");
-
-  const handleForm = async (event: FormEvent) => {
-    event.preventDefault();
-    const result = await createNewBingo(value);
-    if (!result.error && result.result) {
-      router.push("/admin/bingos/" + result.result.id);
-    }
-    console.log(result);
-  };
-  React.useEffect(() => {
-    if (user == null) router.push("/");
-  }, [user]);
-
+export default function AdminHeader() {
   return (
-    <div className="min-h-full">
+    <>
       <nav className="bg-gray-800">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
@@ -89,43 +70,6 @@ function Page() {
           </h1>
         </div>
       </header>
-      <main>
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <form
-            onSubmit={handleForm}
-            className="space-y-6"
-            action="#"
-            method="POST"
-          >
-            <div>
-              <label
-                htmlFor="id"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                Nome do bingo
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  onChange={(e) => setValue(e.target.value)}
-                  name="id"
-                  id="text"
-                  required
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-            </div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Salvar
-            </button>
-          </form>
-        </div>
-      </main>
-    </div>
+    </>
   );
-}
-
-export default Page;
+};
