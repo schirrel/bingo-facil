@@ -15,7 +15,6 @@ function Page() {
     if (!result.error && result.result) {
       router.push("/admin/bingos/" + result.result.id);
     }
-    console.log(result);
   };
   React.useEffect(() => {
     if (user == null) router.push("/");

@@ -40,4 +40,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Links
 - https://www.freecodecamp.org/news/create-full-stack-app-with-nextjs13-and-firebase/
+- https://v1.tailwindcss.com/components/buttons
 - https://tailwindcss.com/
+- https://tailwindcss.com/docs/align-content

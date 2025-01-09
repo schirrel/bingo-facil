@@ -1,9 +1,9 @@
 "use client";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 function Page() {
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = useState("");
   const router = useRouter();
 
   const handleForm = async (event: FormEvent) => {
