@@ -1,12 +1,18 @@
 "use client";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useEffect } from "react";
 import signIn from "@/firebase/auth/signin";
 import { useRouter } from "next/navigation";
+import { useAuthContext } from "@/context/AuthContext";
 
 function Page() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const router = useRouter();
+  const { user } = useAuthContext();
+
+  useEffect(() => {
+    if (user !== null) router.push("/admin");
+  }, [user]);
 
   const handleForm = async (event: FormEvent) => {
     event.preventDefault();
@@ -14,8 +20,8 @@ function Page() {
     const { result, error } = await signIn(email, password);
 
     if (error) {
-        alert('Usuário ou senha inválida');
-        return console.log(error);
+      alert("Usuário ou senha inválida");
+      return console.log(error);
     }
 
     // else successful
@@ -87,7 +93,7 @@ function Page() {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full justify-center rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
             >
               Acessar
             </button>

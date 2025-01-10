@@ -1,5 +1,6 @@
 import AdminHeader from "@/components/admin/header";
-import Item from "@/components/admin/Item";
+import Item from "@/components/admin/Items";
+import NovoItem from "@/components/admin/NovoItem";
 import { getBingo, getBingoItems } from "@/firebase/bingo/read";
 
 export default async function Page({
@@ -8,7 +9,6 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const id = (await params).id;
-
   const response = await getBingo(id);
   const bingo = response.error ? null : response.result;
 
@@ -16,38 +16,26 @@ export default async function Page({
   return (
     <div className="min-h-full">
       <AdminHeader />
-      {bingo ? <h1>Bingo: {bingo.name}</h1> : <h1>Bingo não encontrado.</h1>}
-
-      <ul role="list" className="m-10 divide-y divide-gray-100">
-        <Item id={id} />
-
-        {items.result &&
-          items.result.map((item) => {
-            return (
-              <li key={item.id} className="flex justify-between gap-x-6 py-5">
-                <div className="flex min-w-0 gap-x-4">
-                  <div className="min-w-0 flex-auto">
-                    <p className="text-sm/6 font-semibold text-gray-900">
-                      {item.value}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex w-52">
-                  <div className="items-end content-end self-end ml-auto">
-                    <button className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm h-10 px-4">
-                      Editar
-                    </button>
-                  </div>
-                  <div className="items-end content-end self-end ml-auto">
-                    <button className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm h-10 px-4">
-                      Apagar
-                    </button>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-      </ul>
+      {bingo ? (
+        <h2 className="p-4 text-3xl font-bold tracking-tight text-gray-900">
+          Bingo: {bingo.name}
+        </h2>
+      ) : (
+        <h2>Bingo não encontrado.</h2>
+      )}
+      <div className="grid grid-cols-3 gap-4 place-content-center">
+        <div>
+          <NovoItem id={id} />
+        </div>
+        <div className="col-span-2">
+          <ul role="list" className="m-10 divide-y divide-gray-100">
+            {items.result &&
+              items.result.map((item) => {
+                return <Item key={item.id} item={item} bingoId={id} />;
+              })}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

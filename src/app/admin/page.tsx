@@ -1,27 +1,32 @@
 "use client";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useEffect } from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import signout from "@/firebase/auth/signout";
 import { createNewBingo } from "@/firebase/bingo/create";
+import Loading from "@/components/admin/loading";
 function Page() {
   const { user } = useAuthContext();
   const router = useRouter();
   const [value, setValue] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   const handleForm = async (event: FormEvent) => {
+    setLoading(true);
     event.preventDefault();
-    const result = await createNewBingo(value);
+    const result = await createNewBingo(value, user);
     if (!result.error && result.result) {
       router.push("/admin/bingos/" + result.result.id);
     }
+    setLoading(false);
   };
-  React.useEffect(() => {
+  useEffect(() => {
     if (user == null) router.push("/");
   }, [user]);
 
   return (
     <div className="min-h-full">
+      {loading ? <Loading /> : <></>}
       <nav className="bg-gray-800">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
@@ -116,7 +121,7 @@ function Page() {
             </div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex m-auto w-auto justify-center rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
             >
               Salvar
             </button>
