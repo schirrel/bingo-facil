@@ -2,7 +2,6 @@
 import addData from "../database/addData";
 
 export const createNewBingo = async (name: string, user: any) => {
-  console.log(user);
-  const { result, error } = await addData("bingo", {name});
+  const { result, error } = await addData("bingo", {name, user: user.uid});
   return { result, error };
 };
