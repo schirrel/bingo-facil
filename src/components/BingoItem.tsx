@@ -15,8 +15,9 @@ export default function BingoItem({
 
   const itemCalled = () => {
     if (viewMode) return;
-    setItemCalled(bingoId, item.id);
-    setCalled(true);
+    const newValue = !item.called;
+    setItemCalled(bingoId, item.id, newValue);
+    setCalled(newValue);
   };
 
   return (
@@ -24,11 +25,9 @@ export default function BingoItem({
       onClick={itemCalled}
       className={`flex py-8 rounded-lg border-solid border-2 text-center items-center hover:text-gray-800h-full p-2 flex-col w-full ${
         isCalled
-          ? "bg-lime-300 text-gray-800 text-gray-800 font-bold"
-          : viewMode
-          ? "bg-gray-800 text-white"
-          : "cursor-pointer hover:bg-orange-300 hover:text-gray-800 hover:text-gray-800 bg-gray-800 text-white"
-      }`}
+          ? "bg-lime-300 text-gray-800 font-bold"
+          : "bg-gray-800 text-white "
+      } ${!viewMode ? 'cursor-pointer hover:bg-orange-500 ': ''}`}
     >
       {item.value}
     </div>

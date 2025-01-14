@@ -2,7 +2,7 @@
 import { getDataCollectionItem } from "../database/getData";
 import { updateDataCollection } from "../database/updateData";
 
-export const setItemCalled = async (idBingo: string, idItem: string) => {
+export const setItemCalled = async (idBingo: string, idItem: string, value: boolean) => {
   const response = await getDataCollectionItem(
     "bingo",
     idBingo,
@@ -12,7 +12,7 @@ export const setItemCalled = async (idBingo: string, idItem: string) => {
 
   if (!response.result) return;
 
-  response.result.called = true;
+  response.result.called = value;
   const { result, error } = await updateDataCollection(
     "bingo",
     idBingo,
