@@ -28,6 +28,10 @@ export default function Home() {
             Criar um novo Bingo
           </Link>
         </div>
+
+        <Link className="text-sm place-self-center" href="/como-funciona">
+          Como funciona
+        </Link>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
