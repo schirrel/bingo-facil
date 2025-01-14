@@ -5,16 +5,16 @@ import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { getBingos } from "@/firebase/bingo/read";
 import { useEffect, useState } from "react";
-import { ItemModel } from "@/models/Item";
 import Link from "next/link";
 import Loading from "@/components/admin/loading";
+import { BingoModel } from "@/models/Bingo";
 
 export default function Page() {
   const { user } = useAuthContext();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  const [items, setItems] = useState<ItemModel[]>([]);
+  const [items, setItems] = useState<BingoModel[]>([]);
   if (!user) {
     router.push("/");
   }
@@ -23,8 +23,8 @@ export default function Page() {
     setLoading(true);
 
     const itemsResult = await getBingos((user as any).uid || "");
-    const converted: ItemModel[] =
-      itemsResult.result?.map((itm) => itm as unknown as ItemModel) || [];
+    const converted: BingoModel[] =
+      itemsResult.result?.map((itm) => itm as unknown as BingoModel) || [];
     setItems(converted);
     setLoading(false);
   };
