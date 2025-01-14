@@ -36,8 +36,8 @@ export default function NovoItem({ id }: { id: string }) {
     <>
       {loading ? <Loading /> : <></>}
       <div className="min-w-0 gap-x-4 w-full p-4">
-        <div className="flex min-w-0 gap-x-4 w-full">
-          <div className="w-5/6	">
+        <div className="flex flex-col min-w-0 gap-x-4 w-full">
+          <div className="w-full lg:w-5/6	">
             <label
               htmlFor="item"
               className="block text-sm/6 font-medium text-gray-900"

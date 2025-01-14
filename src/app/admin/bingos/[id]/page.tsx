@@ -2,6 +2,7 @@ import AdminHeader from "@/components/admin/header";
 import Item from "@/components/admin/Items";
 import NovoItem from "@/components/admin/NovoItem";
 import { getBingo, getBingoItems } from "@/firebase/bingo/read";
+import Link from "next/link";
 
 export default async function Page({
   params,
@@ -23,11 +24,27 @@ export default async function Page({
       ) : (
         <h2>Bingo não encontrado.</h2>
       )}
-      <div className="grid grid-cols-3 gap-4 place-content-center">
+      <div className="grid grid-cols-1 p-2 md:grid-cols-3 gap-4 place-content-center">
         <div>
           <NovoItem id={id} />
+
+          <div className="flex gap-2">
+            <Link
+              href={`/admin/bingos/${id}/iniciar`}
+              className="rounded-full border border-solid border-transparent  text-center transition-colors bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm p-1"
+            >
+              Tela de lançamento
+            </Link>
+
+            <Link
+              href={`/bingo/${id}/conferir`}
+              className="rounded-full border border-solid border-transparent  text-center transition-colors bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm p-1"
+            >
+              Tela de Conferência
+            </Link>
+          </div>
         </div>
-        <div className="col-span-2">
+        <div className="md:col-span-2">
           <ul role="list" className="m-10 divide-y divide-gray-100">
             {items.result &&
               items.result.map((item) => {
