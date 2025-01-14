@@ -3,7 +3,6 @@ import Image from "next/image";
 import React, { FormEvent } from "react";
 
 function Page() {
-
   const handleForm = async (event: FormEvent) => {
     event.preventDefault();
   };
@@ -12,8 +11,10 @@ function Page() {
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <Image
           className="mx-auto h-10 w-auto"
-          src="https://schirrel.dev/assets/squirrel-rounded.png"
+          src="/squirrel-rounded.png"
           alt="Schirrel"
+          width={100}
+          height={100}
         />
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
           Participar de um bingo existente
@@ -48,7 +49,10 @@ function Page() {
             className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4"
             role="alert"
           >
-            <p>O identificador fornecido pelo criador do bingo para acessar sua cartela</p>
+            <p>
+              O identificador fornecido pelo criador do bingo para acessar sua
+              cartela
+            </p>
           </div>
           <button
             type="submit"

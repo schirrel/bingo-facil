@@ -3,6 +3,7 @@ import React, { FormEvent } from "react";
 import signUp from "@/firebase/auth/signup";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 function Page() {
   const [email, setEmail] = React.useState("");
@@ -15,7 +16,7 @@ function Page() {
     const { error } = await signUp(email, password);
 
     if (error) {
-      alert('Usuário ou senha inválida');
+      alert("Usuário ou senha inválida");
       return console.log(error);
     }
 
@@ -26,10 +27,12 @@ function Page() {
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <Image
           className="mx-auto h-10 w-auto"
-          src="https://schirrel.dev/assets/squirrel-rounded.png"
+          src="/squirrel-rounded.png"
           alt="Schirrel"
+          width={100}
+          height={100}
         />
-        
+
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
           Criar uma nova conta
         </h2>
@@ -97,6 +100,12 @@ function Page() {
             >
               Criar conta
             </button>
+            <Link
+              className="mt-5 rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
+              href="/signin"
+            >
+              Acessa minha conta
+            </Link>
           </div>
         </form>
       </div>

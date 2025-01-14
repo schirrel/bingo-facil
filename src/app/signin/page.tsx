@@ -4,6 +4,7 @@ import signIn from "@/firebase/auth/signin";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/AuthContext";
 import Image from "next/image";
+import Link from "next/link";
 
 function ConferirPage() {
   const [email, setEmail] = React.useState("");
@@ -36,8 +37,10 @@ function ConferirPage() {
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <Image
           className="mx-auto h-10 w-auto"
-          src="https://schirrel.dev/assets/squirrel-rounded.png"
+          src="/squirrel-rounded.png"
           alt="Schirrel"
+          width={100}
+          height={100}
         />
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
           Acessar sua conta
@@ -100,6 +103,13 @@ function ConferirPage() {
             >
               Acessar
             </button>
+
+            <Link
+              className="mt-5 rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
+              href="/signup"
+            >
+              Novo Acesso
+            </Link>
           </div>
         </form>
       </div>
