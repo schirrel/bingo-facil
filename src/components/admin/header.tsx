@@ -13,7 +13,7 @@ export default function AdminHeader() {
                 <div className="flex items-baseline space-x-4">
                   <h1 className="text-md pr-4 font-bold text-white">Bingo Fácil</h1>
                   <Link
-                    href="/admin/bingo"
+                    href="/admin"
                     className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
                     aria-current="page"
                   >
