@@ -8,6 +8,7 @@ import {
   query,
   where,
   WhereFilterOp,
+  onSnapshot,
 } from "firebase/firestore";
 
 const db = getFirestore(firebase_app);
@@ -69,11 +70,59 @@ export async function getDataCollection(
     );
     result = docs.docs.map((doc) => {
       const data = doc.data();
-      return { value: data.value, id: doc.id, called: Boolean((doc as any).called) };
+      const { value, called } = data;
+      return {
+        value,
+        called,
+        id: doc.id,
+      };
     });
   } catch (e) {
     error = e;
   }
 
   return { result, error };
+}
+
+export async function getDataCollectionItem(
+  colllection: string,
+  id: string,
+  innerCollection: string,
+  innerId: string
+) {
+  let result = null;
+  let error = null;
+  let docRef = doc(db, colllection, id, innerCollection, innerId);
+
+  try {
+    const doc = await getDoc(docRef);
+    if (doc.exists()) {
+      result = doc.data();
+    }
+  } catch (e) {
+    error = e;
+  }
+  return { result, error };
+}
+
+export async function getRealTimeDataCollection(
+  {
+    colllection,
+    id,
+    innerCollection,
+  }: {
+    colllection: string;
+    id: string;
+    innerCollection: string;
+  },
+  callback: () => void
+) {
+  return new Promise((resolve) => {
+    const q = query(collection(db, colllection, id, innerCollection));
+    onSnapshot(q, (snapshot) => {
+      if (snapshot.docChanges().length) {
+        callback();
+      }
+    });
+  });
 }

@@ -10,9 +10,8 @@ export default async function Page({
   const id = (await params).id;
   const response = await getBingo(id);
   const bingo = response.error ? null : response.result;
-
   const items = await getBingoItems(id);
-
+  
   return (
     <div className="min-h-full">
       <AdminHeader />
@@ -30,7 +29,7 @@ export default async function Page({
       >
         {items.result &&
           items.result.map((item) => {
-            return <BingoItem item={item} key={item.id}/>;
+            return <BingoItem bingoId={id} item={item} key={item.id} />;
           })}
       </div>
     </div>

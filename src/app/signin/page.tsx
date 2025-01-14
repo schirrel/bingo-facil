@@ -4,7 +4,7 @@ import signIn from "@/firebase/auth/signin";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/AuthContext";
 
-function Page() {
+function ConferirPage() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const router = useRouter();
@@ -25,7 +25,6 @@ function Page() {
     }
 
     // else successful
-    console.log(result);
     return router.push("/admin");
   };
   return (
@@ -104,4 +103,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default ConferirPage;
