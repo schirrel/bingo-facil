@@ -3,6 +3,7 @@ import React, { FormEvent, useEffect } from "react";
 import signIn from "@/firebase/auth/signin";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/AuthContext";
+import Image from "next/image";
 
 function ConferirPage() {
   const [email, setEmail] = React.useState("");
@@ -10,14 +11,17 @@ function ConferirPage() {
   const router = useRouter();
   const { user } = useAuthContext();
 
+  const goToLogged = () => {
+    router.push("/admin");
+  };
   useEffect(() => {
-    if (user !== null) router.push("/admin");
+    if (user !== null) goToLogged();
   }, [user]);
 
   const handleForm = async (event: FormEvent) => {
     event.preventDefault();
 
-    const { result, error } = await signIn(email, password);
+    const { error } = await signIn(email, password);
 
     if (error) {
       alert("Usuário ou senha inválida");
@@ -30,7 +34,7 @@ function ConferirPage() {
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img
+        <Image
           className="mx-auto h-10 w-auto"
           src="https://schirrel.dev/assets/squirrel-rounded.png"
           alt="Schirrel"

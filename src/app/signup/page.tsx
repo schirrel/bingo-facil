@@ -2,6 +2,7 @@
 import React, { FormEvent } from "react";
 import signUp from "@/firebase/auth/signup";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 function Page() {
   const [email, setEmail] = React.useState("");
@@ -11,24 +12,24 @@ function Page() {
   const handleForm = async (event: FormEvent) => {
     event.preventDefault();
 
-    const { result, error } = await signUp(email, password);
+    const { error } = await signUp(email, password);
 
     if (error) {
       alert('Usuário ou senha inválida');
       return console.log(error);
     }
 
-    // else successful
     return router.push("/admin");
   };
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img
+        <Image
           className="mx-auto h-10 w-auto"
           src="https://schirrel.dev/assets/squirrel-rounded.png"
           alt="Schirrel"
         />
+        
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
           Criar uma nova conta
         </h2>

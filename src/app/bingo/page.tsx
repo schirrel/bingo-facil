@@ -1,6 +1,6 @@
 "use client";
-import React, { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
+import Image from "next/image";
+import React, { FormEvent } from "react";
 
 function Page() {
 
@@ -10,7 +10,7 @@ function Page() {
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img
+        <Image
           className="mx-auto h-10 w-auto"
           src="https://schirrel.dev/assets/squirrel-rounded.png"
           alt="Schirrel"
@@ -37,7 +37,6 @@ function Page() {
             <div className="mt-2">
               <input
                 type="text"
-                onChange={(e) => setValue(e.target.value)}
                 name="id"
                 id="text"
                 required

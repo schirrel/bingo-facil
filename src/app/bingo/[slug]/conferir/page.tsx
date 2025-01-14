@@ -6,12 +6,14 @@ import {
   getBingoItems,
   getBingoItemsRealTime,
 } from "@/firebase/bingo/read";
+import { BingoModel } from "@/models/Bingo";
+import { ItemModel } from "@/models/Item";
 import { useEffect, useState } from "react";
 
 export default function Page({ params }: { params: any }) {
   const [bingoId, setBingoId] = useState("");
-  const [bingo, setBingo] = useState({});
-  const [items, setItems] = useState<any>([]);
+  const [bingo, setBingo] = useState<Partial<BingoModel>>({});
+  const [items, setItems] = useState<ItemModel[]>([]);
   const [reload, setReload] = useState(false);
   const [loading, setLoading] = useState(true);
 

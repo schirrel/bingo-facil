@@ -1,11 +1,5 @@
 import firebase_app from "../config";
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  addDoc,
-  collection,
-} from "firebase/firestore";
+import { getFirestore, addDoc, collection } from "firebase/firestore";
 
 const db = getFirestore(firebase_app);
 export default async function addData(colllection: string, data: any) {
@@ -31,7 +25,10 @@ export async function addDataCollection(
   let error = null;
 
   try {
-    result = await addDoc(collection(db, colllection, id, innerCollection), data);
+    result = await addDoc(
+      collection(db, colllection, id, innerCollection),
+      data
+    );
   } catch (e) {
     error = e;
   }

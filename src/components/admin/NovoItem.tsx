@@ -19,7 +19,7 @@ export default function NovoItem({ id }: { id: string }) {
       }
     });
 
-    pms.length &&
+    if (pms.length) {
       Promise.all(pms)
         .then(() => {
           setValue("");
@@ -29,6 +29,7 @@ export default function NovoItem({ id }: { id: string }) {
         .finally(() => {
           setLoading(false);
         });
+    }
   };
 
   return (
@@ -37,28 +38,28 @@ export default function NovoItem({ id }: { id: string }) {
       <div className="min-w-0 gap-x-4 w-full p-4">
         <div className="flex min-w-0 gap-x-4 w-full">
           <div className="w-5/6	">
-          <label
-            htmlFor="item"
-            className="block text-sm/6 font-medium text-gray-900"
-          >
-            Item <small>(Números, palavras ou frase)</small>
-          </label>
-          <div className="mt-2">
-            <div className="">
-              <textarea
-                onChange={(e) => setText(e.target.value)}
-                value={text}
-                className="hadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              ></textarea>
-              <br />
+            <label
+              htmlFor="item"
+              className="block text-sm/6 font-medium text-gray-900"
+            >
+              Item <small>(Números, palavras ou frase)</small>
+            </label>
+            <div className="mt-2">
+              <div className="">
+                <textarea
+                  onChange={(e) => setText(e.target.value)}
+                  value={text}
+                  className="hadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                ></textarea>
+                <br />
 
-              <small>
-                Para inserir mais de um item, separe os items utilizando ponto-e-virgula
-                (<strong>;</strong>)
-              </small>
+                <small>
+                  Para inserir mais de um item, separe os items utilizando
+                  ponto-e-virgula (<strong>;</strong>)
+                </small>
+              </div>
             </div>
           </div>
-        </div>
 
           <div className="items-end content-end self-end ml-auto">
             <button

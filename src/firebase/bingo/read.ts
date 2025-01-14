@@ -1,4 +1,3 @@
-import { onSnapshot } from "firebase/firestore";
 import getData, {
   getDataCollection,
   getDataQuery,

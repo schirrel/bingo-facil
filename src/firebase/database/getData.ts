@@ -13,7 +13,7 @@ import {
 
 const db = getFirestore(firebase_app);
 export default async function getData(collection: string, id: string) {
-  let docRef = doc(db, collection, id);
+  const docRef = doc(db, collection, id);
 
   let result = null;
   let error = null;
@@ -36,7 +36,6 @@ export async function getDataQuery(
 ) {
   let error = null;
   let result = null;
-  let docRef = doc(db, collectionName);
 
   try {
     const docsQuery = query(
@@ -92,7 +91,7 @@ export async function getDataCollectionItem(
 ) {
   let result = null;
   let error = null;
-  let docRef = doc(db, colllection, id, innerCollection, innerId);
+  const docRef = doc(db, colllection, id, innerCollection, innerId);
 
   try {
     const doc = await getDoc(docRef);
@@ -117,12 +116,10 @@ export async function getRealTimeDataCollection(
   },
   callback: () => void
 ) {
-  return new Promise((resolve) => {
-    const q = query(collection(db, colllection, id, innerCollection));
-    onSnapshot(q, (snapshot) => {
-      if (snapshot.docChanges().length) {
-        callback();
-      }
-    });
+  const q = query(collection(db, colllection, id, innerCollection));
+  onSnapshot(q, (snapshot) => {
+    if (snapshot.docChanges().length) {
+      callback();
+    }
   });
 }
