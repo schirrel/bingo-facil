@@ -17,8 +17,8 @@ export const getBingos = async (id: string) => {
   return { result, error };
 };
 
-export const getBingoItems = async (id: string) => {
-  const { result, error } = await getDataCollection("bingo", id, "items");
+export const getBingoItems = async <T>(id: string) => {
+  const { result, error } = await getDataCollection<T>("bingo", id, "items");
   return { result, error };
 };
 

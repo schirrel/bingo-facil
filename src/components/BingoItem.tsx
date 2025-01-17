@@ -1,5 +1,5 @@
 "use client";
-import { setItemCalled } from "@/firebase/cartela/update";
+import { setItemCalled } from "@/firebase/bingo-item/update";
 import React, { useState } from "react";
 
 export default function BingoItem({

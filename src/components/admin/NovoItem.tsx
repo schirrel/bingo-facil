@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { createCartelaItem } from "@/firebase/cartela/create";
+import { createCartelaItem } from "@/firebase/bingo-item/create";
 import { useRouter } from "next/navigation";
 import Loading from "./loading";
 export default function NovoItem({ id }: { id: string }) {

@@ -1,6 +1,7 @@
-export interface BingoModel {
+import { BaseModel } from "./BaseModel";
+
+export interface BingoModel extends BaseModel {
     name: string;
-    id: string;
     uid: string;
 }
 

@@ -1,5 +1,8 @@
-export interface ItemModel {
+import { BaseModel } from "./BaseModel";
+
+export interface ItemModel extends BaseModel {
     value: string;
-    called: boolean
+    called: boolean;
+    group?: string
 }
 
