@@ -4,11 +4,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import QRCode from 'qrcode';
 import Loading from "@/components/admin/loading";
-import {
-    getBingo,
-    getBingoItems,
-    getBingoItemsRealTime,
-} from "@/firebase/bingo/read";
+import { getBingo } from "@/firebase/bingo/read";
 import { BingoModel } from "@/models/Bingo";
 
 export default function Page() {
@@ -21,15 +17,12 @@ export default function Page() {
     const url = window.location.toString().replace('qrcode', 'conferir');
     const [loading, setLoading] = useState(true);
     const [loadingCode, setLoadingCode] = useState(true);
-    // With promises
 
     useEffect(() => {
-        if (params.slug) {
-            setBingoId(params.slug as string);
-            loadBingo(params.slug as string);
-
+        if (slug) {
+            setBingoId(slug as string);
+            loadBingo(slug as string);
         }
-
     }, []);
 
     const loadBingo = async (slug: string) => {
@@ -44,7 +37,7 @@ export default function Page() {
 
     return (
         <div className="min-h-full text-center m-auto">
-            {loading ? <Loading /> : <></>}
+            {loading || loadingCode ? <Loading /> : <></>}
             <h2 className="p-4 text-3xl font-bold tracking-tight text-gray-900">
                 Bingo: {bingo.name}
             </h2>
