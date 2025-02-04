@@ -42,6 +42,12 @@ export default async function Page({
             >
               Tela de Conferência
             </Link>
+            <Link
+                href={`/bingo/${id}/qrcode`}
+                className="rounded-full border border-solid border-transparent  text-center transition-colors bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm p-1"
+            >
+                Gerar QRCode
+            </Link>
           </div>
         </div>
         <div className="md:col-span-2">
