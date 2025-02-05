@@ -136,7 +136,6 @@ export async function getDataCollectionQuery(
     let result: Array<any> = [];
     let error = null;
     try {
-        debugger;
         const docsQuery = query(
             collection(db, colllection, id, innerCollection),
             where(whereOpts.field, whereOpts.type, whereOpts.value)

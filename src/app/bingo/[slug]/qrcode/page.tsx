@@ -13,8 +13,8 @@ export default function Page() {
     const slug = params.slug as string;
     const [bingoId, setBingoId] = useState("");
     const [bingo, setBingo] = useState<Partial<BingoModel>>({});
-    const [qrCode, setQrCode] = useState('');
-    const urlConferencia = `https://bingo-facil.vercel.app/bingo/${slug}/conferir`;
+    const [qrCodeConferencia, setQrCodeConferencia] = useState('');
+    const [qrCodeCartela, setQrCodeCartela] = useState('');
     const [loading, setLoading] = useState(true);
     const [loadingCode, setLoadingCode] = useState(true);
 
@@ -29,9 +29,13 @@ export default function Page() {
         const bingoRes = await getBingo(bingoId || slug);
         setBingo(bingoRes.result || {});
         setLoading(false);
+        const urlConferencia = `https://bingo-facil.vercel.app/bingo/${slug}/conferir`;
+        const urlCartela = `https://bingo-facil.vercel.app/bingo/${slug}/cartelas`;
 
         const generatedQRCode = await QRCode.toDataURL(urlConferencia);
-        setQrCode(generatedQRCode)
+        setQrCodeConferencia(generatedQRCode)
+        const generatedqrCodeCartela = await QRCode.toDataURL(urlCartela);
+        setQrCodeCartela(generatedqrCodeCartela)
         setLoadingCode(false);
     };
 
@@ -41,7 +45,17 @@ export default function Page() {
             <h2 className="p-4 text-3xl font-bold tracking-tight text-gray-900">
                 Bingo: {bingo.name}
             </h2>
-            {qrCode && <img className="m-auto" src={qrCode} width="600px" />}
+            <div className="grid grid-cols-2">
+
+                <div>
+                    Painel de Conferencia
+                    {qrCodeConferencia && <img className="m-auto" src={qrCodeConferencia} width="600px" />}
+                </div>
+                <div>
+                    Cartela Virtual
+                    {qrCodeCartela && <img className="m-auto" src={qrCodeCartela} width="600px" />}
+                </div>
+            </div>
         </div>
     );
 }

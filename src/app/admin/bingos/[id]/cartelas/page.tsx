@@ -33,21 +33,25 @@ export default function Page() {
         setLoading(true);
         const lines = csv.split("\n");
         for (let idx = 0; idx < lines.length; idx++) {
-            await saveItem(lines[idx], idx+1);
+            await createItem(lines[idx], idx + 1);
         }
         setCSV("");
         loadData();
+        setLoading(false);
     }
 
-    const saveItem = async (value?: string, numero?: number) => {
-        if (csv && (!text && !value)) {
+    const createItem = async (value: string, numero: number) => {
+        const items = value.split(";").map(item => item.trim()).filter(Boolean);
+        await createCartela(id, { items, numero: numero });
+    };
+
+    const saveItem = async () => {
+        if (csv && !text) {
             converterCsv();
             return;
         }
         setLoading(true);
-        const str = text || value || '';
-        const items = str.split(";").map(item => item.trim()).filter(Boolean);
-        await createCartela(id, { items, numero: numero ?? cartelas.length + 1 });
+        await createItem(text, cartelas.length + 1 );
         await loadData();
         setText("");
     };

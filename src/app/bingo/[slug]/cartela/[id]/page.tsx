@@ -14,6 +14,7 @@ export default function Page() {
     const screenOrientation = useScreenOrientation();
     const [selected, setSelected] = useState<number[]>([]);
     const [loading, setLoading] = useState(false);
+    const [initialized, setInitialized] = useState(false);
 
     useEffect(() => {
         loadCartela();
@@ -23,15 +24,15 @@ export default function Page() {
     useEffect(() => {
         if (selected.length) {
             window.localStorage.setItem("selected", JSON.stringify(selected));
+        } else if (initialized) {
+            window.localStorage.setItem("selected", JSON.stringify(selected));
         }
     }, [selected]);
 
     const updateSelected = (index: number) => {
         if (isSelected(index)) {
-            setSelected([
-                ...selected.filter(i => i !== index),
-
-            ]);
+            const filtered = [...selected].filter(i => i !== index);
+            setSelected(filtered)
         } else {
             setSelected([
                 ...selected,
@@ -44,6 +45,7 @@ export default function Page() {
         const sessionData = localStorage.getItem("selected");
         if (sessionData) {
             setSelected(JSON.parse(sessionData))
+            setInitialized(true);
         }
     }
 
