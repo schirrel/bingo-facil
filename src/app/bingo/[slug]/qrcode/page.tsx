@@ -14,7 +14,7 @@ export default function Page() {
     const [bingoId, setBingoId] = useState("");
     const [bingo, setBingo] = useState<Partial<BingoModel>>({});
     const [qrCode, setQrCode] = useState('');
-    const urlConferencia = window.location.toString().replace('qrcode', 'conferir');
+    const urlConferencia = `https://bingo-facil.vercel.app/bingo/${slug}/conferir`;
     const [loading, setLoading] = useState(true);
     const [loadingCode, setLoadingCode] = useState(true);
 
