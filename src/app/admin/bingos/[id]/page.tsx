@@ -1,4 +1,3 @@
-import AdminHeader from "@/components/admin/header";
 import Item from "@/components/admin/Items";
 import NovoItem from "@/components/admin/NovoItem";
 import { getBingo, getBingoItems } from "@/firebase/bingo/read";
@@ -16,7 +15,6 @@ export default async function Page({
   const items = await getBingoItems(id);
   return (
     <div className="min-h-full">
-      <AdminHeader />
       {bingo ? (
         <h2 className="p-4 text-3xl font-bold tracking-tight text-gray-900">
           Bingo: {bingo.name}

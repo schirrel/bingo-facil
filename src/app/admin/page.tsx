@@ -1,10 +1,9 @@
 "use client";
-import React, { FormEvent, useEffect } from "react";
+import React, { FormEvent } from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { createNewBingo } from "@/firebase/bingo/create";
 import Loading from "@/components/admin/loading";
-import AdminHeader from "@/components/admin/header";
 function Page() {
   const { user } = useAuthContext();
   const router = useRouter();
@@ -20,14 +19,10 @@ function Page() {
     }
     setLoading(false);
   };
-  useEffect(() => {
-    if (user == null) router.push("/");
-  }, [user]);
 
   return (
     <div className="min-h-full">
       {loading ? <Loading /> : <></>}
-      <AdminHeader />
       <header className="bg-white shadow">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900">

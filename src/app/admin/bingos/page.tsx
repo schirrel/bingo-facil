@@ -1,8 +1,7 @@
 "use client";
 
-import AdminHeader from "@/components/admin/header";
 import { useAuthContext } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
+import {  } from "next/navigation";
 import { getBingos } from "@/firebase/bingo/read";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -11,13 +10,9 @@ import { BingoModel } from "@/models/Bingo";
 
 export default function Page() {
   const { user } = useAuthContext();
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const [items, setItems] = useState<BingoModel[]>([]);
-  if (!user) {
-    router.push("/");
-  }
 
   const loadItems = async () => {
     setLoading(true);
@@ -35,7 +30,6 @@ export default function Page() {
 
   return (
     <div className="min-h-full">
-      <AdminHeader />
       {loading ? <Loading /> : <></>}
       <ul role="list" className="m-10 divide-y divide-gray-100">
         {items.map((item) => {
