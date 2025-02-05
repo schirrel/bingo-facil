@@ -1,8 +1,8 @@
 "use client";
-import { createCartelaItem } from "@/firebase/cartela/create";
 import React, { useState } from "react";
 import Loading from "./loading";
 import { useRouter } from "next/navigation";
+import { deleteCartelaItem } from "@/firebase/bingo-item/delete";
 
 export default function Item({ item, bingoId }: any) {
   const [loading, setLoading] = useState(false);
@@ -10,7 +10,7 @@ export default function Item({ item, bingoId }: any) {
 
   const deleteItem = async () => {
     setLoading(true);
-    await createCartelaItem(bingoId, item.id);
+    await deleteCartelaItem(bingoId, item.id);
     setLoading(false);
     router.refresh();
   };

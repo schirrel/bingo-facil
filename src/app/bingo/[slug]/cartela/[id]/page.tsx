@@ -1,16 +1,19 @@
 "use client";
 
+import { getCartela } from "@/firebase/cartela/read";
 import useScreenOrientation from "@/hooks/useScreenOrientation";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import Loading from "@/components/admin/loading";
 
 export default function Page() {
     const params = useParams()
-    // const slug = params.slug as string;
+    const slug = params.slug as string;
     const id = params.id as string;
     const [cartela, setCartela] = useState<string[]>([]);
     const screenOrientation = useScreenOrientation();
     const [selected, setSelected] = useState<number[]>([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         loadCartela();
@@ -46,18 +49,20 @@ export default function Page() {
 
     const isSelected = (index: number) => selected.includes(index);
 
-    const loadCartela = () => {
-        const postData = async () => {
-            const response = await fetch("/api/cartela?number=" + id);
-            return response.json();
-        };
-        postData().then((data) => {
-            setCartela(data.cartela);
-        });
+    const loadCartela = async () => {
+        setLoading(true);
+        const response = await getCartela(slug, id);
+        const results = response.result;
+        if (results[0]) {
+            setCartela(results[0].items)
+        }
+        setLoading(false);
+
     }
 
     return (
         <div className="min-h-full text-center m-auto">
+            {loading ? <Loading /> : <></>}
             <h2 className="text-3xl font-bold tracking-tight text-gray-900">Cartela #{id}</h2>
             {screenOrientation === 'portrait-primary' ? <h3 className="text-4xl p-10 font-bold tracking-tight text-gray-900"> Gire seu Telefone </h3> :
                 <div className="text-center m-auto grid grid-cols-5 max-w-90vw">

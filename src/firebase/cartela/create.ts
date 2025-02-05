@@ -1,10 +1,16 @@
 "use client";
 import { addDataCollection } from "../database/addData";
 
-export const createCartelaItem = async (id: string, value: string) => {
-  const { result, error } = await addDataCollection("bingo", id, "items", {
-    value,
-  });
+type Cartela = {
+    numero: number,
+    items: string[]
+}
 
-  return { result, error };
+export const createCartela = async (id: string, value: Cartela) => {
+    const { numero, items } = value;
+    const { result, error } = await addDataCollection("bingo", id, "cartelas", {
+        numero, items
+    });
+
+    return { result, error };
 };
