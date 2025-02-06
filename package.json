@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/third-parties": "^15.1.6",
     "firebase": "^11.1.0",
     "next": "15.1.4",
     "next-share": "^0.27.0",
