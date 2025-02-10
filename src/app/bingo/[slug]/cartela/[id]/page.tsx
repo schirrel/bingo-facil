@@ -13,7 +13,7 @@ export default function Page() {
     const [cartela, setCartela] = useState<string[]>([]);
     const screenOrientation = useScreenOrientation();
     const [selected, setSelected] = useState<number[]>([]);
-    const [missed, setamissed] = useState<number[]>([]);
+    const [missed, setMissed] = useState<number[]>([]);
     const [loading, setLoading] = useState(false);
     const [initialized, setInitialized] = useState(false);
 
