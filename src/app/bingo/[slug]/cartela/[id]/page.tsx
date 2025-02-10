@@ -63,7 +63,7 @@ const updateMissed= (index: number) => {
     
     const loadState = () => {
         const sessionData = localStorage.getItem("selected");
-        const missedSessionData = localStorage.setItem("missed");
+        const missedSessionData = localStorage.getItem("missed");
         
         if (sessionData) {
             setSelected(JSON.parse(sessionData))       
