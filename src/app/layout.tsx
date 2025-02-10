@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthContextProvider } from '@/context/AuthContext'
@@ -18,6 +18,11 @@ export const metadata: Metadata = {
   title: "Bingo Fácil",
   description: "",
 };
+
+export const viewport: Viewport = {
+    initialScale: 0,
+    width: 'device-width'
+}
 
 export default function RootLayout({
   children,
