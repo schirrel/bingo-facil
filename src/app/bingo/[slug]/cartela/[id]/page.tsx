@@ -13,6 +13,7 @@ export default function Page() {
     const [cartela, setCartela] = useState<string[]>([]);
     const screenOrientation = useScreenOrientation();
     const [selected, setSelected] = useState<number[]>([]);
+    const [missed, setamissed] = useState<number[]>([]);
     const [loading, setLoading] = useState(false);
     const [initialized, setInitialized] = useState(false);
 
@@ -29,6 +30,14 @@ export default function Page() {
         }
     }, [selected]);
 
+    useEffect(() => {
+        if (missed.length) {
+            window.localStorage.setItem("missed", JSON.stringify(missed));
+        } else if (initialized) {
+            window.localStorage.setItem("missed", JSON.stringify(missed));
+        }
+    }, [missed]);
+
     const updateSelected = (index: number) => {
         if (isSelected(index)) {
             const filtered = [...selected].filter(i => i !== index);
@@ -40,16 +49,34 @@ export default function Page() {
             ]);
         }
     }
-
+const updateMissed= (index: number) => {
+        if (isMissed(index)) {
+            const filtered = [...missed].filter(i => i !== index);
+            setMissed(filtered);
+        } else {
+            setMissed([
+                ...missed,
+                index
+            ]);
+        }
+    }
+    
     const loadState = () => {
         const sessionData = localStorage.getItem("selected");
+        const missedSessionData = localStorage.setItrm("missed");
+        
         if (sessionData) {
-            setSelected(JSON.parse(sessionData))
-            setInitialized(true);
+            setSelected(JSON.parse(sessionData))       
         }
+        if(missedSessionData){
+            setMissed(JSON.parse(missedSessionData));
+        }
+        setInitialized(true);
     }
 
     const isSelected = (index: number) => selected.includes(index);
+    const isMissed = (index: number) => missed.includes(index);
+    
 
     const loadCartela = async () => {
         setLoading(true);
@@ -74,7 +101,7 @@ export default function Page() {
                     <div className="border-red-800 border-solid border text-2xl font-bold tracking-tight text-gray-900">G</div>
                     <div className="border-red-800 border-solid border text-2xl font-bold tracking-tight text-gray-900">O</div>
                     {cartela && cartela.map((item: string, index: number) => {
-                        return <div onClick={() => updateSelected(index)} className={`p-4 whitespace-break-spaces break-words border-red-800 border-solid border items-center justify-center flex ${isSelected(index) ? 'bg-red-800 text-white' : ''}`} key={item}>
+                        return <div onClick={() => updateSelected(index)} onDoubleClick={() => updateMissed(missed)} className={`p-4 whitespace-break-spaces break-words border-red-800 border-solid border items-center justify-center flex ${isSelected(index) ? 'bg-red-800 text-white' : ''} ${isMissed(index) ? 'bg-gray-800 text-white' :''}`} key={item}>
                             <span>{item}</span></div>
                     })
                     }
