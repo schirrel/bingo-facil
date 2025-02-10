@@ -20,10 +20,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-    initialScale: 0,
-    userScalable: false,
-    width: 'device-width'
-}
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false
+};
 
 export default function RootLayout({
   children,
