@@ -101,7 +101,7 @@ const updateMissed= (index: number) => {
                     <div className="border-red-800 border-solid border text-2xl font-bold tracking-tight text-gray-900">G</div>
                     <div className="border-red-800 border-solid border text-2xl font-bold tracking-tight text-gray-900">O</div>
                     {cartela && cartela.map((item: string, index: number) => {
-                        return <div onClick={() => updateSelected(index)} onDoubleClick={() => updateMissed(missed)} className={`p-4 whitespace-break-spaces break-words border-red-800 border-solid border items-center justify-center flex ${isSelected(index) ? 'bg-red-800 text-white' : ''} ${isMissed(index) ? 'bg-gray-800 text-white' :''}`} key={item}>
+                        return <div onClick={() => updateSelected(index)} onDoubleClick={() => updateMissed(index)} className={`p-4 whitespace-break-spaces break-words border-red-800 border-solid border items-center justify-center flex ${isSelected(index) ? 'bg-red-800 text-white' : ''} ${isMissed(index) ? 'bg-gray-800 text-white' :''}`} key={item}>
                             <span>{item}</span></div>
                     })
                     }
