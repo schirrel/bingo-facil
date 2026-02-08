@@ -49,6 +49,16 @@ export default function Page() {
                 <div>
                     Cartela Virtual
                     {qrCodeCartela && <img className="m-auto" src={qrCodeCartela} style={{ height: "100vh"}} />}
+                     <button
+                        onClick={() => {
+                            const url = `https://bingo-facil.vercel.app/bingo/${slug}/cartela`;
+                            navigator.clipboard.writeText(url);
+                            alert('Link copied to clipboard!');
+                        }}
+                        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    >
+                        Copy Link
+                    </button>
                 </div>
             </div>
         </div>
