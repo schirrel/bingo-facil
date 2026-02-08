@@ -42,18 +42,13 @@ export default function Page() {
     return (
         <div className="min-h-full text-center m-auto">
             {loading || loadingCode ? <Loading /> : <></>}
-            <h2 className="p-4 text-3xl font-bold tracking-tight text-gray-900">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900">
                 Bingo: {bingo.name}
             </h2>
             <div className="grid grid-cols-2">
-
-                <div>
-                    Painel de Conferencia
-                    {qrCodeConferencia && <img className="m-auto" src={qrCodeConferencia} width="600px" />}
-                </div>
                 <div>
                     Cartela Virtual
-                    {qrCodeCartela && <img className="m-auto" src={qrCodeCartela} width="600px" />}
+                    {qrCodeCartela && <img className="m-auto" src={qrCodeCartela} style={{ height: "100vh"}} />}
                 </div>
             </div>
         </div>
